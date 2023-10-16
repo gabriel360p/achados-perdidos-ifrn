@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  version: 0.1.0
+  version: 0.5.0
   title: OPENAPI
-  description: Estudando OPENAPI
+  description: Atividade A10 
 servers:
   - url: http://{host}:{porta}/api
     variables:
