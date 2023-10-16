@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 0.5.0
   title: OPENAPI
-  description: Atividade A10 
+  description: Atividade A10
 servers:
   - url: http://{host}:{porta}/api
     variables:
@@ -24,7 +24,7 @@ paths:
 
   /places/view/{place}:
     get:
-      description:  Retorna uma lugar específico
+      description: Retorna uma lugar específico
       parameters:
         - in: path
           name: place
@@ -94,9 +94,9 @@ paths:
         "404":
           description: Recurso não apagado
 
-# --------------------------------------------------------------------
+  # --------------------------------------------------------------------
 
- # Categories / Categorias -------------------------------------------------------------------
+  # Categories / Categorias -------------------------------------------------------------------
 
   /categories/list:
     get:
@@ -114,7 +114,6 @@ paths:
                     name:
                       type: string
 
-
   /categories/view/{categorie}:
     get:
       description: Retorna uma categoria específica
@@ -131,22 +130,22 @@ paths:
           description: Recurso não encontrado
 
   /categories/store:
-      post:
-        description: Adicionar uma nova categoria
-        requestBody:
-          required: true
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-        responses:
-          "201":
-            description: Salvo com sucesso
-          "404":
-            description: Recurso não encontrado
+    post:
+      description: Adicionar uma nova categoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "201":
+          description: Salvo com sucesso
+        "404":
+          description: Recurso não encontrado
 
   /categories/update/{categorie}:
     put:
@@ -187,23 +186,22 @@ paths:
         "404":
           description: Recurso não apagado
 
-# --------------------------------------------------------------------
+  # --------------------------------------------------------------------
 
-
- # Items -------------------------------------------------------------------
+  # Items -------------------------------------------------------------------
 
   /itens/losts:
     get:
       description: Listar todos itens não devolvidos
       responses:
-        '200':
+        "200":
           description: Operação bem feita
 
   /itens/list:
     get:
       description: Listar todos os itens salvos no sistema
       responses:
-        '200':
+        "200":
           description: Operação bem feita
         "404":
           description: Recurso não encontrado
@@ -212,38 +210,38 @@ paths:
     get:
       description: Listar todos os itens devolvidos
       responses:
-        '200':
+        "200":
           description: Operação bem feita
         "404":
           description: Recurso não encontrado
 
   /itens/store:
-      post:
-        description: Adicionar um novo item
-        requestBody:
-          required: true
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  place:
-                    type: string
-                  categorie:
-                    type: string
-                  more:
-                    type: string
-                    description: Descrição extra sobre o item
-                  refound:
-                    type: boolean
-                    description: Se o item foi devolvido ou não
-        responses:
-          "201":
-            description: Salvo com sucesso
-          "404":
-            description: Recurso não encontrado
+    post:
+      description: Adicionar um novo item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                place:
+                  type: string
+                categorie:
+                  type: string
+                more:
+                  type: string
+                  description: Descrição extra sobre o item
+                refound:
+                  type: boolean
+                  description: Se o item foi devolvido ou não
+      responses:
+        "201":
+          description: Salvo com sucesso
+        "404":
+          description: Recurso não encontrado
 
   /itens/show/{iten}:
     get:
@@ -275,39 +273,39 @@ paths:
         "404":
           description: Recurso não apagado
 
-  # /itens/update/{iten}:
-    put:
-      description: Atualizar os dados de um item
-      parameters:
-        - in: path
-          name: iten
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
+    /itens/update/{iten}:
+      put:
+        description: Atualizar os dados de um item
+        parameters:
+          - in: path
+            name: iten
+            required: true
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                place:
-                  type: string
-                categorie:
-                  type: string
-                more:
-                  type: string
-                  description: Descrição extra sobre o item
-                refound:
-                  type: boolean
-                  description: Se o item foi devolvido ou não
-      responses:
-        "200":
-          description: Atualizado com sucesso
-        "404":
-          description: Recurso não encontrado
+              type: integer
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  place:
+                    type: string
+                  categorie:
+                    type: string
+                  more:
+                    type: string
+                    description: Descrição extra sobre o item
+                  refound:
+                    type: boolean
+                    description: Se o item foi devolvido ou não
+        responses:
+          "200":
+            description: Atualizado com sucesso
+          "404":
+            description: Recurso não encontrado
 
   /itens/refound/{iten}:
     get:
@@ -324,7 +322,7 @@ paths:
           description: Atualizado com sucesso
         "404":
           description: Recurso não encontrado
-                      
+
   /itens/reopen/{iten}:
     get:
       description: Definindo o item como não devolvido novamente
@@ -334,7 +332,7 @@ paths:
           required: true
           schema:
             type: integer
-            
+
       responses:
         "200":
           description: Atualizado com sucesso
