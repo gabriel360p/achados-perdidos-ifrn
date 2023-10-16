@@ -1,0 +1,343 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: OPENAPI
+  description: Estudando OPENAPI
+servers:
+  - url: http://{host}:{porta}/api
+    variables:
+      host:
+        default: localhost
+      porta:
+        default: "8000"
+paths:
+  # Places / Lugares -------------------------------------------------------------------
+
+  /places/list:
+    get:
+      description: Retorna uma lista dos lugares salvos no sistema
+      responses:
+        "200":
+          description: Operação bem Feita
+        "404":
+          description: Recurso não encontrado
+
+  /places/view/{place}:
+    get:
+      description:  Retorna uma lugar específico
+      parameters:
+        - in: path
+          name: place
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operação bem Feita
+        "404":
+          description: Recurso não encontrado
+
+  /places/store:
+    post:
+      description: Adicionar um novo lugar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "201":
+          description: Salvo com sucesso
+        "404":
+          description: Recurso não encontrado
+
+  /places/update/{place}:
+    put:
+      description: Atualizar os dados de um lugar
+      parameters:
+        - in: path
+          name: place
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
+
+  /places/{place}:
+    delete:
+      description: Remover um lugar
+      parameters:
+        - in: path
+          name: place
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Apagado com sucesso
+        "404":
+          description: Recurso não apagado
+
+# --------------------------------------------------------------------
+
+ # Categories / Categorias -------------------------------------------------------------------
+
+  /categories/list:
+    get:
+      description: Retorna uma lista das categorias salvas no sistema
+      responses:
+        "200":
+          description: Operação bem Feita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+
+
+  /categories/view/{categorie}:
+    get:
+      description: Retorna uma categoria específica
+      parameters:
+        - in: path
+          name: categorie
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operação bem Feita
+        "404":
+          description: Recurso não encontrado
+
+  /categories/store:
+      post:
+        description: Adicionar uma nova categoria
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+        responses:
+          "201":
+            description: Salvo com sucesso
+          "404":
+            description: Recurso não encontrado
+
+  /categories/update/{categorie}:
+    put:
+      description: Atualizar os dados de uma categoria
+      parameters:
+        - in: path
+          name: categorie
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
+
+  /categories/{categorie}:
+    delete:
+      description: Remover uma categoria
+      parameters:
+        - in: path
+          name: categorie
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Apagado com sucesso
+        "404":
+          description: Recurso não apagado
+
+# --------------------------------------------------------------------
+
+
+ # Items -------------------------------------------------------------------
+
+  /itens/losts:
+    get:
+      description: Listar todos itens não devolvidos
+      responses:
+        '200':
+          description: Operação bem feita
+
+  /itens/list:
+    get:
+      description: Listar todos os itens salvos no sistema
+      responses:
+        '200':
+          description: Operação bem feita
+        "404":
+          description: Recurso não encontrado
+
+  /itens/refounds:
+    get:
+      description: Listar todos os itens devolvidos
+      responses:
+        '200':
+          description: Operação bem feita
+        "404":
+          description: Recurso não encontrado
+
+  /itens/store:
+      post:
+        description: Adicionar um novo item
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  place:
+                    type: string
+                  categorie:
+                    type: string
+                  more:
+                    type: string
+                    description: Descrição extra sobre o item
+                  refound:
+                    type: boolean
+                    description: Se o item foi devolvido ou não
+        responses:
+          "201":
+            description: Salvo com sucesso
+          "404":
+            description: Recurso não encontrado
+
+  /itens/show/{iten}:
+    get:
+      description: Retorna uma categoria específica
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operação bem Feita
+        "404":
+          description: Recurso não encontrado
+
+  /itens/{iten}:
+    delete:
+      description: Remover um item
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Apagado com sucesso
+        "404":
+          description: Recurso não apagado
+
+  # /itens/update/{iten}:
+    put:
+      description: Atualizar os dados de um item
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                place:
+                  type: string
+                categorie:
+                  type: string
+                more:
+                  type: string
+                  description: Descrição extra sobre o item
+                refound:
+                  type: boolean
+                  description: Se o item foi devolvido ou não
+      responses:
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
+
+  /itens/refound/{iten}:
+    get:
+      description: Definindo o item como devolvido
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
+                      
+  /itens/reopen/{iten}:
+    get:
+      description: Definindo o item como não devolvido novamente
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+            
+      responses:
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
+# --------------------------------------------------------------------
