@@ -52,9 +52,7 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
-        "404":
-          description: Recurso não encontrado
-
+        
   /places/update/{place}:
     put:
       description: Atualizar os dados de um lugar
@@ -144,8 +142,7 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
-        "404":
-          description: Recurso não encontrado
+
 
   /categories/update/{categorie}:
     put:
@@ -240,8 +237,6 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
-        "404":
-          description: Recurso não encontrado
 
   /itens/show/{iten}:
     get:
