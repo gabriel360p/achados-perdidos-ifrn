@@ -204,5 +204,5 @@ switch ($path) {
 
     default:
 
-        echo "Opção encontrada";
+        echo "Opção '{$path}' não encontrada";
 }
