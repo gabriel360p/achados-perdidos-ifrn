@@ -24,7 +24,7 @@ class Request
     //----------------------------------------------------------------------------------------------------------
     public function store_places($name)
     {
-        $response = $this->client->request('POST', 'http://localhost:8000/api/places/save', [
+        $response = $this->client->request('POST', 'http://localhost:8000/api/places', [
             'json' => [
                 'name' => $name,
             ]
@@ -47,7 +47,7 @@ class Request
     //----------------------------------------------------------------------------------------------------------
     public function update_place($id, $name)
     {
-        $response = $this->client->request('PUT', 'http://localhost:8000/api/places/update', [
+        $response = $this->client->request('PUT', 'http://localhost:8000/api/places', [
             'json' => [
                 'id' => $id,
                 'name' => $name,
@@ -59,7 +59,7 @@ class Request
     //----------------------------------------------------------------------------------------------------------
     public function delete_place($id)
     { 
-        $response = $this->client->request('DELETE', 'http://localhost:8000/api/places/delete', [
+        $response = $this->client->request('DELETE', 'http://localhost:8000/api/places', [
             'json' => [
                 'id' => $id
             ]

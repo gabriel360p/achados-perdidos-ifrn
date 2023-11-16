@@ -93,7 +93,7 @@ Route::get('/places', function () {
     return response(Place::all(), 200);
 });
 
-Route::post('/places/save', function (Request $request) {
+Route::post('/places', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
         [
@@ -115,7 +115,7 @@ Route::post('/places/save', function (Request $request) {
     }
 });
 
-Route::put('/places/update', function (Request $request) {
+Route::put('/places', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
         [
@@ -139,7 +139,7 @@ Route::put('/places/update', function (Request $request) {
     }
 });
 
-Route::delete('/places/delete', function (Request $request) {
+Route::delete('/places', function (Request $request) {
 
     $place = Place::findOrFail($request->id);   
     if (!$place) {
