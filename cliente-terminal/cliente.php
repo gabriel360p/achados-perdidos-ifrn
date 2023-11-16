@@ -1,19 +1,20 @@
 <?php
-
-//Funciona
-
 require __DIR__ . '/guzzle_request.php';
 
 $path = $argv[1];
-
 switch ($path) {
+
+
+        //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
+        //-- PLACES --//
+
+
     case 1: //listando locais -- OK
 
         // Comando no terminal:
         // php cliente.php 1 
 
         $request->index_places();
-
         break;
     case 2: //salvando novo local -- OK
 
@@ -25,7 +26,6 @@ switch ($path) {
         } else {
             echo "Alerta: é preciso inserir um nome para esse local";
         }
-
         break;
     case 3: //acessando um local -- OK
 
@@ -37,7 +37,6 @@ switch ($path) {
         } else {
             echo "Alerta: é preciso inserir o id do local";
         }
-
         break;
     case 4: //editando local -- OK
 
@@ -49,7 +48,6 @@ switch ($path) {
         } else {
             echo "Alerta: todos os campos precisam ser passados";
         }
-
         break;
     case 5: //apagando um local -- OK
 
@@ -61,11 +59,11 @@ switch ($path) {
         } else {
             echo "Alerta: é preciso inserir o id do local";
         }
-
         break;
 
 
         //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
+        //-- CATEGORIES --//
 
 
     case 6: //listando categorias -- OK
@@ -74,7 +72,6 @@ switch ($path) {
         // php cliente.php 6
 
         $request->index_categories();
-
         break;
     case 7: //salvando nova categoria -- OK
 
@@ -86,7 +83,6 @@ switch ($path) {
         } else {
             echo "Alerta: é preciso inserir o nome da categoria";
         }
-
         break;
     case 8: //acessando uma categoria -- OK
 
@@ -98,7 +94,6 @@ switch ($path) {
         } else {
             echo "Alerta: é preciso inserir o id da categoria";
         }
-
         break;
     case 9: //editando categoria -- OK
 
@@ -110,7 +105,6 @@ switch ($path) {
         } else {
             echo "Alerta: todos os campos precisam ser passados";
         }
-
         break;
     case 10: //apagando uma categoria -- OK
 
@@ -126,6 +120,7 @@ switch ($path) {
 
 
         //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
+        //-- ITENS --//
 
 
     case 11: //listando itens -- OK
@@ -134,9 +129,7 @@ switch ($path) {
         // php cliente.php 11
 
         $request->index_itens();
-
         break;
-
     case 12: //adcionando item -- OK
 
         // Comando no terminal:
@@ -152,9 +145,7 @@ switch ($path) {
         } else {
             echo "Alerta: todos os campos precisam ser passados";
         }
-
         break;
-
     case 13: //acessar itens perdidos -- OK
 
         // Comando no terminal:
@@ -163,8 +154,6 @@ switch ($path) {
         $request->lost_itens();
 
         break;
-
-
     case 14: //deletar item perdido -- OK
 
         // Comando no terminal:
@@ -176,8 +165,6 @@ switch ($path) {
             echo "Alerta: é preciso inserir o id da categoria";
         }
         break;
-
-
     case 15: //acessar item perdido -- OK
 
         // Comando no terminal:
@@ -189,12 +176,11 @@ switch ($path) {
             echo "Alerta: é preciso inserir o id da categoria";
         }
         break;
-
     case 16: //devolver item perdido -- OK
 
         // Comando no terminal:
         // php cliente.php 16 id-item
-        
+
         if ($id = $argv[2]) {
             $request->refound_itens($id);
         } else {
@@ -203,6 +189,5 @@ switch ($path) {
         break;
 
     default:
-
         echo "Opção '{$path}' não encontrada";
 }
