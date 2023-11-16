@@ -14,27 +14,27 @@ class CategorieSeed extends Seeder
     public function run(): void
     {
         Categorie::create([
-            'name'=>"Material Escolar"
+            'name' => "Material Escolar"
         ]);
 
         Categorie::create([
-            'name'=>"Eletrônico"
+            'name' => "Eletrônico"
         ]);
 
         Categorie::create([
-            'name'=>"Roupa"
+            'name' => "Roupa"
         ]);
 
         Categorie::create([
-            'name'=>"Comida"
+            'name' => "Comida"
         ]);
 
         Categorie::create([
-            'name'=>"Acessório"
+            'name' => "Acessório"
         ]);
 
         Categorie::create([
-            'name'=>"Diversos"
+            'name' => "Diversos"
         ]);
     }
 }

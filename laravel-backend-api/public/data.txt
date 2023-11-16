@@ -1,0 +1,37 @@
+Ajuda na hora de identificar os campos
+​​
+campus: "CA"
+​​
+cpf: "714.339.304-55"
+​​
+data_de_nascimento: "2004-10-27"
+​​
+email: "gabriel.costa2@academico.ifrn.edu.br"
+​​
+email_academico: "gabriel.costa2@academico.ifrn.edu.br"
+​​
+email_google_classroom: "gabriel.costa1@escolar.ifrn.edu.br"
+​​
+email_preferencial: "gabriel.costa2@academico.ifrn.edu.br"
+​​
+email_secundario: "gabrielmark210@gmail.com"
+​​
+foto: "/media/alunos/75x100/267610.TzbTpYvXbsoq.jpg"
+​​
+identificacao: "20221101110085"
+​​
+nome: "Gabriel Silva"
+​​
+nome_registro: "Gabriel Costa da Silva"
+​​
+nome_social: ""
+​​
+nome_usual: "Gabriel Costa"
+​​
+primeiro_nome: "Gabriel"
+​​
+sexo: "M"
+​​
+tipo_usuario: "Aluno"
+​​
+ultimo_nome: "Silva"

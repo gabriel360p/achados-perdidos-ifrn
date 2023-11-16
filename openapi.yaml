@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  version: 0.5.0
-  title: OPENAPI
-  description: Atividade A10
+  version: 0.7.0
+  title: Achados e perdidos ifrn.
+  description: Descrição openApi do projeto achados e perdidos ifrn.
 servers:
   - url: http://{host}:{porta}/api
     variables:
@@ -13,7 +13,7 @@ servers:
 paths:
   # Places / Lugares -------------------------------------------------------------------
 
-  /places/list:
+  /places:
     get:
       description: Retorna uma lista dos lugares salvos no sistema
       responses:
@@ -37,7 +37,7 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /places/store:
+  /places/save:
     post:
       description: Adicionar um novo lugar
       requestBody:
@@ -52,7 +52,9 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
-        
+        "400":
+          description: Falha em validação dos dados
+
   /places/update/{place}:
     put:
       description: Atualizar os dados de um lugar
@@ -76,6 +78,8 @@ paths:
           description: Atualizado com sucesso
         "404":
           description: Recurso não encontrado
+        "400":
+          description: Falha em validação dos dados
 
   /places/{place}:
     delete:
@@ -96,7 +100,7 @@ paths:
 
   # Categories / Categorias -------------------------------------------------------------------
 
-  /categories/list:
+  /categories:
     get:
       description: Retorna uma lista das categorias salvas no sistema
       responses:
@@ -127,7 +131,7 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /categories/store:
+  /categories/save:
     post:
       description: Adicionar uma nova categoria
       requestBody:
@@ -142,7 +146,8 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
-
+        "400":
+          description: Falha em validação dos dados
 
   /categories/update/{categorie}:
     put:
@@ -167,6 +172,8 @@ paths:
           description: Atualizado com sucesso
         "404":
           description: Recurso não encontrado
+        "400":
+          description: Falha em validação dos dados
 
   /categories/{categorie}:
     delete:
@@ -187,14 +194,14 @@ paths:
 
   # Items -------------------------------------------------------------------
 
-  /itens/losts:
+  /itens/lost:
     get:
       description: Listar todos itens não devolvidos
       responses:
         "200":
           description: Operação bem feita
 
-  /itens/list:
+  /itens:
     get:
       description: Listar todos os itens salvos no sistema
       responses:
@@ -203,7 +210,7 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /itens/refounds:
+  /itens/refound:
     get:
       description: Listar todos os itens devolvidos
       responses:
@@ -212,7 +219,7 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /itens/store:
+  /itens/save:
     post:
       description: Adicionar um novo item
       requestBody:
@@ -237,8 +244,10 @@ paths:
       responses:
         "201":
           description: Salvo com sucesso
+        "400":
+          description: Falha em validação dos dados
 
-  /itens/show/{iten}:
+  /itens/view/{iten}:
     get:
       description: Retorna uma categoria específica
       parameters:
@@ -301,6 +310,8 @@ paths:
             description: Atualizado com sucesso
           "404":
             description: Recurso não encontrado
+          "400":
+            description: Falha em validação dos dados
 
   /itens/refound/{iten}:
     get:
@@ -318,19 +329,37 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /itens/reopen/{iten}:
-    get:
-      description: Definindo o item como não devolvido novamente
+    # /itens/update/{iten}:
+    put:
+      description: Adicionar um novo item
       parameters:
         - in: path
           name: iten
           required: true
           schema:
             type: integer
-
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                place:
+                  type: string
+                categorie:
+                  type: string
+                more:
+                  type: string
+                  description: Descrição extra sobre o item
+                refound:
+                  type: boolean
+                  description: Se o item foi devolvido ou não
       responses:
-        "200":
-          description: Atualizado com sucesso
-        "404":
-          description: Recurso não encontrado
+        "201":
+          description: Salvo com sucesso
+        "400":
+          description: Falha em salvar
 # --------------------------------------------------------------------

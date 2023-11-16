@@ -14,31 +14,31 @@ class PlaceSeed extends Seeder
     public function run(): void
     {
         Place::create([
-            'name'=>"Banheiro"
+            'name' => "Banheiro"
         ]);
 
         Place::create([
-            'name'=>"Auditório"
+            'name' => "Auditório"
         ]);
 
         Place::create([
-            'name'=>"Laboratório"
+            'name' => "Laboratório"
         ]);
 
         Place::create([
-            'name'=>"Biblioteca"
+            'name' => "Biblioteca"
         ]);
 
         Place::create([
-            'name'=>"Sala de Aula"
+            'name' => "Sala de Aula"
         ]);
 
         Place::create([
-            'name'=>"Cantina"
+            'name' => "Cantina"
         ]);
 
         Place::create([
-            'name'=>"Refeitório"
+            'name' => "Refeitório"
         ]);
     }
 }
