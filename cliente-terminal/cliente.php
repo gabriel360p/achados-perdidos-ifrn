@@ -30,7 +30,7 @@ switch ($path) {
         // php baldes.php 3 id-local 
 
         $id = $argv[2];
-        $request->view_place($id);
+        $request->view_places($id);
 
         break;
     case 4: //editando local -- OK
@@ -40,7 +40,7 @@ switch ($path) {
 
         $id = $argv[2];
         $name = $argv[3];
-        $request->update_place($id, $name);
+        $request->update_places($id, $name);
 
         break;
     case 5: //apagando um local -- OK
@@ -49,7 +49,53 @@ switch ($path) {
         // php baldes.php 5 id-local 
 
         $id = $argv[2];
-        $request->delete_place($id);
+        $request->delete_places($id);
+
+        break;
+
+    case 6: //listando categorias -- OK
+
+        // Comando no terminal:
+        // php cliente.php 6
+
+        $request->index_categories();
+
+        break;
+    case 7: //salvando nova categoria -- OK
+
+        // Comando no terminal:
+        // php baldes.php 7 nome-local 
+
+        $name = $argv[2];
+        $request->store_categories($name);
+
+        break;
+    case 8: //acessando uma categoria -- OK
+
+        // Comando no terminal:
+        // php baldes.php 8 id-local 
+
+        $id = $argv[2];
+        $request->view_categories($id);
+
+        break;
+    case 9: //editando categoria -- OK
+
+        // Comando no terminal:
+        // php baldes.php 9 id-local nome-local 
+
+        $id = $argv[2];
+        $name = $argv[3];
+        $request->update_categories($id, $name);
+
+        break;
+    case 10: //apagando uma categoria -- OK
+
+        // Comando no terminal:
+        // php baldes.php 10 id-local 
+
+        $id = $argv[2];
+        $request->delete_categories($id);
 
         break;
 

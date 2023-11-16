@@ -33,7 +33,7 @@ class Request
     }
 
     //----------------------------------------------------------------------------------------------------------
-    public function view_place($id)
+    public function view_places($id)
     {
         $response = $this->client->request('GET', 'http://localhost:8000/api/places/view', [
             'json' => [
@@ -45,7 +45,7 @@ class Request
     }
 
     //----------------------------------------------------------------------------------------------------------
-    public function update_place($id, $name)
+    public function update_places($id, $name)
     {
         $response = $this->client->request('PUT', 'http://localhost:8000/api/places', [
             'json' => [
@@ -57,7 +57,7 @@ class Request
     }
 
     //----------------------------------------------------------------------------------------------------------
-    public function delete_place($id)
+    public function delete_places($id)
     { 
         $response = $this->client->request('DELETE', 'http://localhost:8000/api/places', [
             'json' => [
@@ -70,6 +70,60 @@ class Request
 
     //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
 
+
+    //----------------------------------------------------------------------------------------------------------
+    public function index_categories()
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/categories');
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function store_categories($name)
+    {
+        $response = $this->client->request('POST', 'http://localhost:8000/api/categories', [
+            'json' => [
+                'name' => $name,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function view_categories($id)
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/categories/view', [
+            'json' => [
+                'id' => $id,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function update_categories($id, $name)
+    {
+        $response = $this->client->request('PUT', 'http://localhost:8000/api/categories', [
+            'json' => [
+                'id' => $id,
+                'name' => $name,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function delete_categories($id)
+    { 
+        $response = $this->client->request('DELETE', 'http://localhost:8000/api/categories', [
+            'json' => [
+                'id' => $id
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+    }
 
 
 

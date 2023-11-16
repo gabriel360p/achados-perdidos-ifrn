@@ -168,7 +168,7 @@ Route::get('/categories', function () {
     return Categorie::all();
 });
 
-Route::post('/categories/save', function (Request $request) {
+Route::post('/categories', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
         [
@@ -185,7 +185,9 @@ Route::post('/categories/save', function (Request $request) {
     }
 });
 
-Route::put('/categories/update/{categorie}', function (Request $request, Categorie $categorie) {
+Route::put('/categories', function (Request $request) {
+    $categorie = Categorie::findOrFail($request->id);   
+
     $validator = Validator::make(
         $request->all(),
         [
@@ -207,7 +209,9 @@ Route::put('/categories/update/{categorie}', function (Request $request, Categor
     }
 });
 
-Route::delete('/categories/{categorie}', function (Request $request, Categorie $categorie) {
+Route::delete('/categories', function (Request $request) {
+    $categorie = Categorie::findOrFail($request->id);   
+
     if (!$categorie) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
     } else {
@@ -216,7 +220,9 @@ Route::delete('/categories/{categorie}', function (Request $request, Categorie $
     }
 });
 
-Route::get('/categories/view/{categorie}', function (Request $request, Categorie $categorie) {
+Route::get('/categories/view', function (Request $request) {
+    $categorie = Categorie::findOrFail($request->id);   
+
     if ($categorie) {
         return response($categorie, 200);
     } else {
