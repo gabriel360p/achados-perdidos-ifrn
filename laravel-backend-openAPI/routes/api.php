@@ -105,6 +105,10 @@ Route::post('/places/save', function (Request $request) {
         return response(json_encode([
             'Mensagem de Erro' => 'Precisa inserir um nome referente a esse lugar',
         ]), 400);
+    } elseif (sizeof(\DB::table('places')->where('name', 'like', '%' . $request->name)->get()) != 0) {
+        return response(json_encode([
+            'Mensagem de Erro' => 'Este lugar ja esta cadastrado',
+        ]), 400);
     } else {
         $place = Place::create($request->all());
         return response($place, 201);
