@@ -20,8 +20,11 @@ switch ($path) {
         // Comando no terminal:
         // php baldes.php 2 nome-local 
 
-        $name = $argv[2];
-        $request->store_places($name);
+        if($name = $argv[2]){
+            $request->store_places($name);
+        }else{
+            echo "Alerta: é preciso inserir um nome para esse local";
+        }
 
         break;
     case 3: //acessando um local -- OK
@@ -29,8 +32,11 @@ switch ($path) {
         // Comando no terminal:
         // php baldes.php 3 id-local 
 
-        $id = $argv[2];
-        $request->view_places($id);
+        if($id = $argv[2]){
+            $request->view_places($id);
+        }else{
+            echo "Alerta: é preciso inserir o id do local";
+        }
 
         break;
     case 4: //editando local -- OK
@@ -38,9 +44,11 @@ switch ($path) {
         // Comando no terminal:
         // php baldes.php 3 id-local nome-local 
 
-        $id = $argv[2];
-        $name = $argv[3];
-        $request->update_places($id, $name);
+        if($id = $argv[2] && $name = $argv[3]){
+            $request->update_places($id, $name);
+        }else{
+            echo "Alerta: todos os campos precisam ser passados";
+        }
 
         break;
     case 5: //apagando um local -- OK
@@ -48,16 +56,16 @@ switch ($path) {
         // Comando no terminal:
         // php baldes.php 5 id-local 
 
-        $id = $argv[2];
-        $request->delete_places($id);
+        if($id = $argv[2]){
+            $request->delete_places($id);
+        }else{
+            echo "Alerta: é preciso inserir o id do local";
+        }
 
         break;
 
 
-
-
-
-
+    //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
 
 
     case 6: //listando categorias -- OK
@@ -107,7 +115,9 @@ switch ($path) {
         break;
 
 
+    //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
 
+    
     case 11: //listando itens -- OK
 
         // Comando no terminal:

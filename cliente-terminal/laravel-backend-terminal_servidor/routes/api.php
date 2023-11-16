@@ -135,7 +135,7 @@ Route::put('/places', function (Request $request) {
         ]), 400);
     } else {
         $place->update($request->all());
-        return response($place,200);
+        return response($place, 200);
     }
 });
 
@@ -181,7 +181,8 @@ Route::post('/categories', function (Request $request) {
             'Mensagem de Erro' => 'Precisa inserir um nome referente a esse lugar',
         ]), 400);
     } else {
-        Categorie::create($request->all());
+        $categorie = Categorie::create($request->all());
+        return response($categorie, 200);
     }
 });
 
@@ -205,7 +206,7 @@ Route::put('/categories', function (Request $request) {
         ]), 400);
     } else {
         $categorie->update($request->all());
-        return response($categorie,200);
+        return response($categorie, 200);
     }
 });
 
@@ -236,7 +237,6 @@ Route::get('/categories/view', function (Request $request) {
 
 // ITENS ----------------------------------------------
 
-
 Route::post('/itens', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
@@ -252,11 +252,6 @@ Route::post('/itens', function (Request $request) {
             'Mensagem de Erro' => 'Todos os campos precisam ser preenchidos!',
         ]), 400);
     } elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get()) == 0) {
-
-        // return response(json_encode(
-        //     sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get())
-        // ));
-
         return response(json_encode([
             'Mensagem de Erro' => 'Categoria nao encontrada',
         ]), 400);
@@ -281,8 +276,6 @@ Route::post('/itens', function (Request $request) {
     }
 });
 
-
-
 Route::get('/itens', function () {
     $itens = Iten::all();
     return response($itens, 200);
@@ -298,74 +291,28 @@ Route::get('/itens/view', function (Request $request) {
     if ($iten) {
         return response($iten, 200);
     } else {
-        return response(["Mensagem de erro"=>"Item não encontrado"],404);
+        return response(["Mensagem de erro" => "Item não encontrado"], 404);
     }
 });
 
 Route::delete('/itens', function (Request $request) {
     $iten = Iten::findOrFail($request->id);
     if ($iten->refound == false) {
-        return response(["Mensagem de erro"=>"Erro, não é possivel apagar pois ainda não foi devolvido"], 400);
+        return response(["Mensagem de erro" => "Erro, não é possivel apagar pois ainda não foi devolvido"], 400);
     } else {
         $iten->delete();
-        return response(["Mensagem"=>"Item apagado"],200);
+        return response(["Mensagem" => "Item apagado"], 200);
     }
 });
-
-// Route::put('/itens/update/{iten}', function (Request $request, Iten $iten) {
-//     $validator = Validator::make(
-//         $request->all(),
-//         [
-//             'name' => 'required',
-//             'place' => 'required',
-//             'categorie' => 'required',
-//             'more' => 'required',
-//         ],
-//     );
-//     if ($iten) {
-//         return response(json_encode([
-//             'Mensagem de Erro' => 'Item não encontrado',
-//         ]), 404);
-//     } elseif ($validator->fails()) {
-//         return response(json_encode([
-//             'Mensagem de Erro' => 'Todos os campos precisam ser preenchidos!',
-//         ]), 400);
-//     } elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get()) == 0) {
-
-//         return response(json_encode([
-//             'Mensagem de Erro' => 'Categoria nao encontrada',
-//         ]), 400);
-//     } elseif (sizeof(Place::where('name', 'like', '%' . $request->place)->get()) == 0) {
-
-//         return response(json_encode([
-//             'Mensagem de Erro' => 'Local nao encontrado',
-//         ]), 400);
-//     } else {
-//         $cat = Categorie::where('name', 'like', '%' . $request->categorie . '%')->first();
-//         $place = Place::where('name', 'like', '%' . $request->categorie . '%')->first();
-
-//         $iten->update([
-//             'categorie' => $cat->name,
-//             'place' => $place->name,
-//             'more' => $request->more,
-//             'refound' => $request->refound,
-//             'name' => $request->name,
-//         ]);
-
-//         return response($iten, 201);
-//     }
-// });
 
 Route::get('/itens/refound', function (Request $request) {
     $iten = Iten::findOrFail($request->id);
     if (!$iten) {
-        return response(["Mensagem de erro" =>"Erro, item não encontrado"], 404);
+        return response(["Mensagem de erro" => "Erro, item não encontrado"], 404);
     } else {
         $iten->delete();
         return response(['Mensagem' => 'Item devolvido'], 200);
     }
 });
-
-
 
 // -----------------------------------------------------
