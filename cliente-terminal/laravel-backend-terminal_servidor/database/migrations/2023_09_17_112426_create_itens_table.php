@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             
             $table->string('name');
-            $table->text('more');
+            // $table->text('more');
 
-            $table->boolean('refound')->default(false);
+            $table->boolean('refound')->nullable()->default(false);
 
             $table->string('place');
             $table->string('categorie');

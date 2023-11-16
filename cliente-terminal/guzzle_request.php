@@ -58,7 +58,7 @@ class Request
 
     //----------------------------------------------------------------------------------------------------------
     public function delete_places($id)
-    { 
+    {
         $response = $this->client->request('DELETE', 'http://localhost:8000/api/places', [
             'json' => [
                 'id' => $id
@@ -116,7 +116,7 @@ class Request
 
     //----------------------------------------------------------------------------------------------------------
     public function delete_categories($id)
-    { 
+    {
         $response = $this->client->request('DELETE', 'http://localhost:8000/api/categories', [
             'json' => [
                 'id' => $id
@@ -126,66 +126,72 @@ class Request
     }
 
 
+    //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function list()
-    { //LIST ----------------------------------------------------------------------------------------------------------
-        $response = $this->client->request('GET', 'http://localhost:8000/api/baldes');
-
-        $html = json_decode($response->getBody(true)); //pegando o corpo, os dados que vem em array, pra facilitar coloco ele dentro da função json_decode()
+    public function index_itens()
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/itens');
         echo "Status: " . $response->getStatusCode() . PHP_EOL;
-        print_r($html);
+        echo ($response->getBody());
     }
 
-    public function delete($nome)
-    { //DELETE ----------------------------------------------------------------------------------------------------------
-        $response = $this->client->request('DELETE', 'http://localhost:8000/api/baldes/balde/delete', [
+    //----------------------------------------------------------------------------------------------------------
+    public function store_itens($name, $categorie, $place)
+    {
+        $response = $this->client->request('POST', 'http://localhost:8000/api/itens', [
             'json' => [
-                'nome' => $nome
+                'name' => $name,
+                'categorie' => $categorie,
+                'place' => $place,
             ]
         ]);
-    }
-
-    public function update($balde, $usuario, $nome)
-    { //UPDATE ----------------------------------------------------------------------------------------------------------
-        $response = $this->client->request('GET', 'http://localhost:8000/api/baldes/balde/update', [
-            'json' => [
-                'balde' => $balde,
-                'usuario' => $usuario,
-                'nome' => $nome
-            ]
-        ]);
-
         echo "Status: " . $response->getStatusCode() . PHP_EOL;
     }
 
-    public function show($balde)
-    { //SHOW ----------------------------------------------------------------------------------------------------------
-        $response = $this->client->request('GET', 'http://localhost:8000/api/baldes/balde/show', [
+    //----------------------------------------------------------------------------------------------------------
+    public function lost_itens()
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/lost');
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+    
+    //----------------------------------------------------------------------------------------------------------
+    public function delete_itens($id)
+    {
+        $response = $this->client->request('DELETE', 'http://localhost:8000/api/itens', [
             'json' => [
-                'nome' => $balde
+                'id' => $id
             ]
         ]);
-
         echo "Status: " . $response->getStatusCode() . PHP_EOL;
-
-        print_r(json_decode($response->getBody(true)));
     }
+
+    public function view_itens($id)
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/view', [
+            'json' => [
+                'id' => $id,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+
+    public function refound_itens($id)
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/refound', [
+            'json' => [
+                'id' => $id,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+
 }
 
 $request = new Request(new Client());//inicialiando o objeto

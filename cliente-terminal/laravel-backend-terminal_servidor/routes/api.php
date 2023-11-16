@@ -135,13 +135,13 @@ Route::put('/places', function (Request $request) {
         ]), 400);
     } else {
         $place->update($request->all());
-        return response(200);
+        return response($place,200);
     }
 });
 
 Route::delete('/places', function (Request $request) {
 
-    $place = Place::findOrFail($request->id);   
+    $place = Place::findOrFail($request->id);
     if (!$place) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
     } else {
@@ -151,11 +151,11 @@ Route::delete('/places', function (Request $request) {
 });
 
 Route::get('/places/view', function (Request $request) {
-    $place = Place::findOrFail($request->id);   
+    $place = Place::findOrFail($request->id);
     if ($place) {
         return response($place, 200);
     } else {
-        return response(['Mensagem de Erro'=> 'Lugar não encontrado'],404);
+        return response(['Mensagem de Erro' => 'Lugar não encontrado'], 404);
     }
 });
 // -----------------------------------------------------
@@ -186,7 +186,7 @@ Route::post('/categories', function (Request $request) {
 });
 
 Route::put('/categories', function (Request $request) {
-    $categorie = Categorie::findOrFail($request->id);   
+    $categorie = Categorie::findOrFail($request->id);
 
     $validator = Validator::make(
         $request->all(),
@@ -205,12 +205,12 @@ Route::put('/categories', function (Request $request) {
         ]), 400);
     } else {
         $categorie->update($request->all());
-        return response(200);
+        return response($categorie,200);
     }
 });
 
 Route::delete('/categories', function (Request $request) {
-    $categorie = Categorie::findOrFail($request->id);   
+    $categorie = Categorie::findOrFail($request->id);
 
     if (!$categorie) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
@@ -221,7 +221,7 @@ Route::delete('/categories', function (Request $request) {
 });
 
 Route::get('/categories/view', function (Request $request) {
-    $categorie = Categorie::findOrFail($request->id);   
+    $categorie = Categorie::findOrFail($request->id);
 
     if ($categorie) {
         return response($categorie, 200);
@@ -237,14 +237,13 @@ Route::get('/categories/view', function (Request $request) {
 // ITENS ----------------------------------------------
 
 
-Route::post('/itens/save', function (Request $request) {
+Route::post('/itens', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
         [
             'name' => 'required',
             'place' => 'required',
             'categorie' => 'required',
-            'more' => 'required',
         ],
     );
 
@@ -268,13 +267,13 @@ Route::post('/itens/save', function (Request $request) {
         ]), 400);
     } else {
         $cat = Categorie::where('name', 'like', '%' . $request->categorie . '%')->first();
-        $place = Place::where('name', 'like', '%' . $request->categorie . '%')->first();
+        $place = Place::where('name', 'like', '%' . $request->place . '%')->first();
 
         $iten = Iten::create([
             'categorie' => $cat->name,
             'place' => $place->name,
             'more' => $request->more,
-            'refound' => $request->refound,
+            // 'refound' => $request->refound,
             'name' => $request->name,
         ]);
 
@@ -294,26 +293,22 @@ Route::get('/itens/lost', function () {
     return response($iten, 200);
 });
 
-Route::get('/itens/view/{iten}', function (Request $request, Iten $iten) {
+Route::get('/itens/view', function (Request $request) {
+    $iten = Iten::findOrFail($request->id);
     if ($iten) {
         return response($iten, 200);
     } else {
-        return response(404);
+        return response(["Mensagem de erro"=>"Item não encontrado"],404);
     }
 });
 
-Route::get('/itens/refound', function () {
-    $itens = \DB::table('itens')->where('refound', '=', true)->get();
-    return response($itens, 200);
-});
-
-
-Route::delete('/itens/{iten}', function (Request $request, Iten $iten) {
+Route::delete('/itens', function (Request $request) {
+    $iten = Iten::findOrFail($request->id);
     if ($iten->refound == false) {
-        return response("Erro, não é possivel apagar pois ainda não foi devolvido", 500);
+        return response(["Mensagem de erro"=>"Erro, não é possivel apagar pois ainda não foi devolvido"], 400);
     } else {
         $iten->delete();
-        return response(200);
+        return response(["Mensagem"=>"Item apagado"],200);
     }
 });
 
@@ -361,9 +356,14 @@ Route::delete('/itens/{iten}', function (Request $request, Iten $iten) {
 //     }
 // });
 
-Route::get('/itens/refound/{iten}', function (Request $request, Iten $iten) {
-    $iten->delete();
-    return response(200);
+Route::get('/itens/refound', function (Request $request) {
+    $iten = Iten::findOrFail($request->id);
+    if (!$iten) {
+        return response(["Mensagem de erro" =>"Erro, item não encontrado"], 404);
+    } else {
+        $iten->delete();
+        return response(['Mensagem' => 'Item devolvido'], 200);
+    }
 });
 
 

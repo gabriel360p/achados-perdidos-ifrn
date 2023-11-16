@@ -10,7 +10,7 @@ class Iten extends Model
     use HasFactory;
     protected $fillable=[
         'name',
-        'more', 
+        // 'more', 
         'place',
         'categorie',
         'refound',
