@@ -4,10 +4,8 @@
 
 require __DIR__ . '/guzzle_request.php';
 
-//Referente a variável path -> (1) Armazenar -- (2) Listar tudo do banco -- (3) Deletar do Banco -- (4) Atualizar -- (5) Mostrar um item do banco
-
-
 $path = $argv[1];
+
 switch ($path) {
     case 1: //listando locais -- OK
 
@@ -17,78 +15,45 @@ switch ($path) {
         $request->index_places();
 
         break;
-
-
     case 2: //salvando novo local -- OK
 
         // Comando no terminal:
-        // php baldes.php 2 nomeLocal 
+        // php baldes.php 2 nome-local 
 
         $name = $argv[2];
         $request->store_places($name);
 
         break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-    case 3: //Salvando no Banco -- OK
+    case 3: //acessando um local -- OK
 
         // Comando no terminal:
-        // php baldes.php 3 nome-usuario nome-balde 
+        // php baldes.php 3 id-local 
 
-        $usuario = $argv[2];
+        $id = $argv[2];
+        $request->view_place($id);
 
-        $nome = $argv[3];
+        break;
+    case 4: //editando local -- OK
 
-        $request->store($usuario, $nome);
+        // Comando no terminal:
+        // php baldes.php 3 id-local nome-local 
+
+        $id = $argv[2];
+        $name = $argv[3];
+        $request->update_place($id, $name);
+
+        break;
+    case 5: //apagando um local -- OK
+
+        // Comando no terminal:
+        // php baldes.php 5 id-local 
+
+        $id = $argv[2];
+        $request->delete_place($id);
 
         break;
 
-    case 4: //atualizando o balde -- OK
+    default:
 
-        // Comando no terminal:
-        // php baldes.php 4 nome-do-balde novo-nome novo-usuario
-
-        $balde = $argv[2];
-
-        $nome = $argv[3];
-
-        $usuario = $argv[4];
-
-        $request->update($balde, $usuario, $nome);
-
-        break;
-
-    case 5: //listando um determinado balde -- OK
-
-        // Comando no terminal:
-        // php baldes.php 5 nome-do-balde
-
-        $balde = $argv[2];
-
-        $request->show($balde);
-
-        break;
-
-    case 6: //Deletendo o balde do banco -- OK
-
-        // Comando no terminal:
-
-        // php baldes.php 6 nome-do-balde
-
-        $nome = $argv[2];
-
-        $request->delete($nome);
-
-        break;
+        echo "Opção encontrada";
 }

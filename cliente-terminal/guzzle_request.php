@@ -15,16 +15,15 @@ class Request
 
     //----------------------------------------------------------------------------------------------------------
     public function index_places()
-    {  
+    {
         $response = $this->client->request('GET', 'http://localhost:8000/api/places');
         echo "Status: " . $response->getStatusCode() . PHP_EOL;
-        $dados = $response->getBody();
-        echo($dados);
+        echo ($response->getBody());
     }
 
     //----------------------------------------------------------------------------------------------------------
     public function store_places($name)
-    { 
+    {
         $response = $this->client->request('POST', 'http://localhost:8000/api/places/save', [
             'json' => [
                 'name' => $name,
@@ -33,9 +32,43 @@ class Request
         echo "Status: " . $response->getStatusCode() . PHP_EOL;
     }
 
+    //----------------------------------------------------------------------------------------------------------
+    public function view_place($id)
+    {
+        $response = $this->client->request('GET', 'http://localhost:8000/api/places/view', [
+            'json' => [
+                'id' => $id,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+        echo ($response->getBody());
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function update_place($id, $name)
+    {
+        $response = $this->client->request('PUT', 'http://localhost:8000/api/places/update', [
+            'json' => [
+                'id' => $id,
+                'name' => $name,
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function delete_place($id)
+    { 
+        $response = $this->client->request('DELETE', 'http://localhost:8000/api/places/delete', [
+            'json' => [
+                'id' => $id
+            ]
+        ]);
+        echo "Status: " . $response->getStatusCode() . PHP_EOL;
+    }
 
 
-
+    //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
 
 
 

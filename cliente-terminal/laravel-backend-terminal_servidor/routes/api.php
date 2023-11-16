@@ -115,13 +115,15 @@ Route::post('/places/save', function (Request $request) {
     }
 });
 
-Route::put('/places/update/{place}', function (Request $request, Place $place) {
+Route::put('/places/update', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
         [
             'name' => 'required',
         ],
     );
+
+    $place = Place::FindOrFail($request->id);
 
     if ($validator->fails()) {
         return response(json_encode([
@@ -137,7 +139,9 @@ Route::put('/places/update/{place}', function (Request $request, Place $place) {
     }
 });
 
-Route::delete('/places/{place}', function (Request $request, Place $place) {
+Route::delete('/places/delete', function (Request $request) {
+
+    $place = Place::findOrFail($request->id);   
     if (!$place) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
     } else {
@@ -146,11 +150,12 @@ Route::delete('/places/{place}', function (Request $request, Place $place) {
     }
 });
 
-Route::get('/places/view/{place}', function (Request $request, Place $place) {
+Route::get('/places/view', function (Request $request) {
+    $place = Place::findOrFail($request->id);   
     if ($place) {
         return response($place, 200);
     } else {
-        return response(404);
+        return response(['Mensagem de Erro'=> 'Lugar não encontrado'],404);
     }
 });
 // -----------------------------------------------------
