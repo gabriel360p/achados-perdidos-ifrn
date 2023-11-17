@@ -158,6 +158,11 @@ Route::get('/places/view', function (Request $request) {
         return response(['Mensagem de Erro' => 'Lugar não encontrado'], 404);
     }
 });
+
+Route::get('/places-names', function (Request $request) {
+    $places = Place::all(['id','name']);
+    return response($places, 200);
+});
 // -----------------------------------------------------
 
 
@@ -227,9 +232,15 @@ Route::get('/categories/view', function (Request $request) {
     if ($categorie) {
         return response($categorie, 200);
     } else {
-        return response(404);
+        return response(["Mensagem de Erro"=>"Categoria nao encontrada"],404);
     }
 });
+
+Route::get('/categories-names', function (Request $request) {
+    $categories = Categorie::all(['id','name']);
+    return response($categories, 200);
+});
+
 
 // -----------------------------------------------------
 
