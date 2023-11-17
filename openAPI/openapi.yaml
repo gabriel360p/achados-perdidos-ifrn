@@ -94,7 +94,7 @@ paths:
         "200":
           description: Apagado com sucesso
         "404":
-          description: Recurso não apagado
+          description: Recurso não encontrado
 
   # --------------------------------------------------------------------
 
@@ -106,15 +106,8 @@ paths:
       responses:
         "200":
           description: Operação bem Feita
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
+        "404":
+          description: Recurso não encontrado
 
   /categories/view/{categorie}:
     get:
@@ -188,7 +181,7 @@ paths:
         "200":
           description: Apagado com sucesso
         "404":
-          description: Recurso não apagado
+          description: Recurso não encontrado
 
   # --------------------------------------------------------------------
 
@@ -204,7 +197,7 @@ paths:
           description: Recurso não encontrado
 
   /itens/save:
-    post:
+    post: 
       description: Adicionar um novo item
       requestBody:
         required: true
@@ -220,9 +213,7 @@ paths:
                 categorie:
                   type: string
                   description: Descrição extra sobre o item
-                refound:
-                  type: boolean
-                  description: Se o item foi devolvido ou não
+
       responses:
         "201":
           description: Salvo com sucesso
@@ -243,40 +234,6 @@ paths:
           description: Operação bem Feita
         "404":
           description: Recurso não encontrado
-
-  /itens/update/{iten}:
-    put:
-      description: Atualizar os dados de um item
-      parameters:
-        - in: path
-          name: iten
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                place:
-                  type: string
-                categorie:
-                  type: string
-                  description: Descrição extra sobre o item
-                refound:
-                  type: boolean
-                  description: Se o item foi devolvido ou não
-      responses:
-        "200":
-          description: Atualizado com sucesso
-        "404":
-          description: Recurso não encontrado
-        "400":
-          description: Falha em validação dos dados
 
   /itens/refound/{iten}:
     put:
@@ -306,5 +263,5 @@ paths:
         "200":
           description: Apagado com sucesso
         "404":
-          description: Recurso não apagado
+          description: Recurso não encontrado
 # --------------------------------------------------------------------
