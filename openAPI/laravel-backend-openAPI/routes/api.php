@@ -340,7 +340,7 @@ Route::delete('/itens/{iten}', function (Iten $iten) {
 //     }
 // });
 
-Route::get('/itens/refound/{iten}', function (Iten $iten) {
+Route::put('/itens/refound/{iten}', function (Iten $iten) {
     $iten->delete();
     return response(200);
 });

@@ -203,15 +203,6 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /itens/refound:
-    get:
-      description: Listar todos os itens devolvidos
-      responses:
-        "200":
-          description: Operação bem feita
-        "404":
-          description: Recurso não encontrado
-
   /itens/save:
     post:
       description: Adicionar um novo item
@@ -286,6 +277,21 @@ paths:
           description: Recurso não encontrado
         "400":
           description: Falha em validação dos dados
+
+  /itens/refound/{iten}:
+    put:
+      description: Devolver o item
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Devolvido com sucesso
+        "404":
+          description: Recurso não encontrado
 
   /itens/{iten}:
     delete:
