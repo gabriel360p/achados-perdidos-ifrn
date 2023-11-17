@@ -137,7 +137,7 @@ Route::put('/places/update/{place}', function (Request $request, Place $place) {
     }
 });
 
-Route::delete('/places/{place}', function (Request $request, Place $place) {
+Route::delete('/places/{place}', function (Place $place) {
     if (!$place) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
     } else {
@@ -146,13 +146,18 @@ Route::delete('/places/{place}', function (Request $request, Place $place) {
     }
 });
 
-Route::get('/places/view/{place}', function (Request $request, Place $place) {
+Route::get('/places/view/{place}', function ( Place $place) {
+try {
     if ($place) {
         return response($place, 200);
     } else {
         return response(404);
     }
+} catch (\Throwable $th) {
+    throw $th;
+}
 });
+
 // -----------------------------------------------------
 
 
@@ -202,7 +207,7 @@ Route::put('/categories/update/{categorie}', function (Request $request, Categor
     }
 });
 
-Route::delete('/categories/{categorie}', function (Request $request, Categorie $categorie) {
+Route::delete('/categories/{categorie}', function (Categorie $categorie) {
     if (!$categorie) {
         return response(['Mensagem de erro' => 'Lugar não encontrado'], 404);
     } else {
@@ -211,7 +216,7 @@ Route::delete('/categories/{categorie}', function (Request $request, Categorie $
     }
 });
 
-Route::get('/categories/view/{categorie}', function (Request $request, Categorie $categorie) {
+Route::get('/categories/view/{categorie}', function (Categorie $categorie) {
     if ($categorie) {
         return response($categorie, 200);
     } else {
@@ -225,7 +230,6 @@ Route::get('/categories/view/{categorie}', function (Request $request, Categorie
 
 // ITENS ----------------------------------------------
 
-
 Route::post('/itens/save', function (Request $request) {
     $validator = Validator::make(
         $request->all(),
@@ -233,7 +237,6 @@ Route::post('/itens/save', function (Request $request) {
             'name' => 'required',
             'place' => 'required',
             'categorie' => 'required',
-            'more' => 'required',
         ],
     );
 
@@ -242,10 +245,6 @@ Route::post('/itens/save', function (Request $request) {
             'Mensagem de Erro' => 'Todos os campos precisam ser preenchidos!',
         ]), 400);
     } elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get()) == 0) {
-
-        // return response(json_encode(
-        //     sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get())
-        // ));
 
         return response(json_encode([
             'Mensagem de Erro' => 'Categoria nao encontrada',
@@ -262,7 +261,6 @@ Route::post('/itens/save', function (Request $request) {
         $iten = Iten::create([
             'categorie' => $cat->name,
             'place' => $place->name,
-            'more' => $request->more,
             'refound' => $request->refound,
             'name' => $request->name,
         ]);
@@ -271,19 +269,12 @@ Route::post('/itens/save', function (Request $request) {
     }
 });
 
-
-
 Route::get('/itens', function () {
     $itens = Iten::all();
     return response($itens, 200);
 });
 
-Route::get('/itens/lost', function () {
-    $iten = Iten::where('refound', false)->get();
-    return response($iten, 200);
-});
-
-Route::get('/itens/view/{iten}', function (Request $request, Iten $iten) {
+Route::get('/itens/view/{iten}', function (Iten $iten) {
     if ($iten) {
         return response($iten, 200);
     } else {
@@ -296,8 +287,7 @@ Route::get('/itens/refound', function () {
     return response($itens, 200);
 });
 
-
-Route::delete('/itens/{iten}', function (Request $request, Iten $iten) {
+Route::delete('/itens/{iten}', function (Iten $iten) {
     if ($iten->refound == false) {
         return response("Erro, não é possivel apagar pois ainda não foi devolvido", 500);
     } else {
@@ -350,11 +340,9 @@ Route::delete('/itens/{iten}', function (Request $request, Iten $iten) {
 //     }
 // });
 
-Route::get('/itens/refound/{iten}', function (Request $request, Iten $iten) {
+Route::get('/itens/refound/{iten}', function (Iten $iten) {
     $iten->delete();
     return response(200);
 });
-
-
 
 // -----------------------------------------------------

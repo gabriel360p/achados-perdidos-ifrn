@@ -194,13 +194,6 @@ paths:
 
   # Items -------------------------------------------------------------------
 
-  /itens/lost:
-    get:
-      description: Listar todos itens não devolvidos
-      responses:
-        "200":
-          description: Operação bem feita
-
   /itens:
     get:
       description: Listar todos os itens salvos no sistema
@@ -235,8 +228,6 @@ paths:
                   type: string
                 categorie:
                   type: string
-                more:
-                  type: string
                   description: Descrição extra sobre o item
                 refound:
                   type: boolean
@@ -262,76 +253,9 @@ paths:
         "404":
           description: Recurso não encontrado
 
-  /itens/{iten}:
-    delete:
-      description: Remover um item
-      parameters:
-        - in: path
-          name: iten
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Apagado com sucesso
-        "404":
-          description: Recurso não apagado
-
-    /itens/update/{iten}:
-      put:
-        description: Atualizar os dados de um item
-        parameters:
-          - in: path
-            name: iten
-            required: true
-            schema:
-              type: integer
-        requestBody:
-          required: true
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  place:
-                    type: string
-                  categorie:
-                    type: string
-                  more:
-                    type: string
-                    description: Descrição extra sobre o item
-                  refound:
-                    type: boolean
-                    description: Se o item foi devolvido ou não
-        responses:
-          "200":
-            description: Atualizado com sucesso
-          "404":
-            description: Recurso não encontrado
-          "400":
-            description: Falha em validação dos dados
-
-  /itens/refound/{iten}:
-    get:
-      description: Definindo o item como devolvido
-      parameters:
-        - in: path
-          name: iten
-          required: true
-          schema:
-            type: integer
-
-      responses:
-        "200":
-          description: Atualizado com sucesso
-        "404":
-          description: Recurso não encontrado
-
-    # /itens/update/{iten}:
+  /itens/update/{iten}:
     put:
-      description: Adicionar um novo item
+      description: Atualizar os dados de um item
       parameters:
         - in: path
           name: iten
@@ -351,15 +275,30 @@ paths:
                   type: string
                 categorie:
                   type: string
-                more:
-                  type: string
                   description: Descrição extra sobre o item
                 refound:
                   type: boolean
                   description: Se o item foi devolvido ou não
       responses:
-        "201":
-          description: Salvo com sucesso
+        "200":
+          description: Atualizado com sucesso
+        "404":
+          description: Recurso não encontrado
         "400":
-          description: Falha em salvar
+          description: Falha em validação dos dados
+
+  /itens/{iten}:
+    delete:
+      description: Remover um item
+      parameters:
+        - in: path
+          name: iten
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Apagado com sucesso
+        "404":
+          description: Recurso não apagado
 # --------------------------------------------------------------------

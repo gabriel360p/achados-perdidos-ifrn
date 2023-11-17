@@ -9,8 +9,7 @@ class Iten extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name',
-        'more', 
+        'name', 
         'place',
         'categorie',
         'refound',
