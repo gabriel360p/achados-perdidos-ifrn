@@ -267,7 +267,7 @@ Route::post('/itens', function (Request $request) {
             'place' => $pl->name,
             'name' => $request->name,
         ]);
-        return response($iten,201);
+        return response($iten, 201);
     }
 });
 
@@ -306,7 +306,7 @@ Route::get('/itens/refound', function (Request $request) {
 });
 
 Route::get('/itens-names', function () {
-    $itens = Iten::all(['id', 'name','refound']);
+    $itens = Iten::all(['id', 'name', 'refound']);
     return response($itens, 200);
 });
 // -----------------------------------------------------
