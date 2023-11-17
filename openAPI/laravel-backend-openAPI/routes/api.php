@@ -133,7 +133,7 @@ Route::put('/places/update/{place}', function (Request $request, Place $place) {
         ]), 400);
     } else {
         $place->update($request->all());
-        return response(200);
+        return response($place, 200);
     }
 });
 
@@ -146,16 +146,16 @@ Route::delete('/places/{place}', function (Place $place) {
     }
 });
 
-Route::get('/places/view/{place}', function ( Place $place) {
-try {
-    if ($place) {
-        return response($place, 200);
-    } else {
-        return response(404);
+Route::get('/places/view/{place}', function (Place $place) {
+    try {
+        if ($place) {
+            return response($place, 200);
+        } else {
+            return response(404);
+        }
+    } catch (\Throwable $th) {
+        throw $th;
     }
-} catch (\Throwable $th) {
-    throw $th;
-}
 });
 
 // -----------------------------------------------------
@@ -180,8 +180,13 @@ Route::post('/categories/save', function (Request $request) {
         return response(json_encode([
             'Mensagem de Erro' => 'Precisa inserir um nome referente a esse lugar',
         ]), 400);
+    } elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->name)->get()) != 0) {
+        return response(json_encode([
+            'Mensagem de Erro' => 'Esta categoria ja esta cadastrada',
+        ]), 400);
     } else {
-        Categorie::create($request->all());
+        $cat = Categorie::create($request->all());
+        return response($cat, 200);
     }
 });
 
@@ -203,7 +208,7 @@ Route::put('/categories/update/{categorie}', function (Request $request, Categor
         ]), 400);
     } else {
         $categorie->update($request->all());
-        return response(200);
+        return response($categorie, 200);
     }
 });
 
@@ -231,6 +236,7 @@ Route::get('/categories/view/{categorie}', function (Categorie $categorie) {
 // ITENS ----------------------------------------------
 
 Route::post('/itens/save', function (Request $request) {
+
     $validator = Validator::make(
         $request->all(),
         [
@@ -242,29 +248,26 @@ Route::post('/itens/save', function (Request $request) {
 
     if ($validator->fails()) {
         return response(json_encode([
-            'Mensagem de Erro' => 'Todos os campos precisam ser preenchidos!',
+            'Mensagem' => 'Todos os campos precisam ser preenchidos',
         ]), 400);
-    } elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get()) == 0) {
-
+    }elseif (sizeof(\DB::table('categories')->where('name', 'like', '%' . $request->categorie)->get()) == 0) {
         return response(json_encode([
-            'Mensagem de Erro' => 'Categoria nao encontrada',
+            'Mensagem' => 'Categoria nao encontrada',
         ]), 400);
     } elseif (sizeof(Place::where('name', 'like', '%' . $request->place)->get()) == 0) {
 
         return response(json_encode([
-            'Mensagem de Erro' => 'Local nao encontrado',
+            'Mensagem' => 'Local nao encontrado',
         ]), 400);
     } else {
         $cat = Categorie::where('name', 'like', '%' . $request->categorie . '%')->first();
-        $place = Place::where('name', 'like', '%' . $request->categorie . '%')->first();
+        $pl = Place::where('name', 'like', '%' . $request->place . '%')->first();
 
         $iten = Iten::create([
             'categorie' => $cat->name,
-            'place' => $place->name,
-            'refound' => $request->refound,
+            'place' => $pl->name,
             'name' => $request->name,
         ]);
-
         return response($iten, 201);
     }
 });

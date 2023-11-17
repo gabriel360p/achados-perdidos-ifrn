@@ -12,7 +12,6 @@ class Iten extends Model
         'name', 
         'place',
         'categorie',
-        'refound',
         // 'place_id',
         // 'categorie_id',
     ];

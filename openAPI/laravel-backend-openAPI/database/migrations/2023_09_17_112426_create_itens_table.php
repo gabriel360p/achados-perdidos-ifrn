@@ -16,8 +16,6 @@ return new class extends Migration
             
             $table->string('name');
 
-            $table->boolean('refound')->default(false);
-
             $table->string('place');
             $table->string('categorie');
 
