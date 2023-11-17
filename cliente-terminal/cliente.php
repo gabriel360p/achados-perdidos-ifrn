@@ -1,10 +1,7 @@
 <?php
 require __DIR__ . '/guzzle_request.php';
 
-// $path = $argv[1];
-
 $ativoMenuPrincipal = true;
-
 
 while ($ativoMenuPrincipal) {
     echo "\n";
@@ -25,8 +22,8 @@ while ($ativoMenuPrincipal) {
     $path = readline();
 
     switch ($path) {
-        case 1:
             //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
+        case 1:
             //-- CATEGORIAS --//
             $ativoMenuCategorias = true;
 
@@ -117,10 +114,8 @@ while ($ativoMenuPrincipal) {
             break; //seção categorias
 
 
-
-
-        case 2:
             //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
+        case 2:
             //-- LOCAIS --//
             $ativoMenuLocais = true;
 
@@ -149,7 +144,6 @@ while ($ativoMenuPrincipal) {
                     case 1: //listando locais -- OK
                         $request->index_places();
                         break;
-
                     case 2: //salvando novo local -- OK
                         echo "Locais já registrados:";
                         echo "\n";
@@ -164,7 +158,6 @@ while ($ativoMenuPrincipal) {
                         }
                         echo "\n";
                         break;
-
                     case 3: //acessando um local -- OK
                         echo "Insira o id do local";
                         echo "\n";
@@ -206,9 +199,9 @@ while ($ativoMenuPrincipal) {
                     default:
                         echo "Opção {$pathCategories} inválida";
                         echo "\n";
-                } //switch categorias
-            } //while seção categorias
-            break; //seção categorias
+                } //switch locais
+            } //while seção locais
+            break; //seção locais
 
 
 
@@ -216,30 +209,6 @@ while ($ativoMenuPrincipal) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // case 2:
-            //     //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
-            //     //-- LOCAIS --//
-            //     break;
-
-            // case 3:
-            //     //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
-            //     //-- ITENS --//
-            //     break;
         case 0:
             //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
             //-- SAIR --//
