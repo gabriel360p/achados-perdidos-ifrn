@@ -137,6 +137,8 @@ class Request
             echo 'Status: ' . $response->getStatusCode();
         }
     }
+
+    //----------------------------------------------------------------------------------------------------------
     public function categories_names()
     {
         try {
@@ -236,73 +238,120 @@ class Request
 
 
 
-    
+
 
 
     //---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/---/
     //-- ITENS --//
     public function index_itens()
     {
-        $response = $this->client->request('GET', 'http://localhost:8000/api/itens');
-        
-        echo ($response->getBody());
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8000/api/itens');
+            if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                var_dump(json_decode($response->getBody(), true));
+            } else {
+                echo 'Status: ' . $response->getStatusCode();
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            echo 'Status: ' . $response->getStatusCode();
+        }
     }
+
+    //----------------------------------------------------------------------------------------------------------
+    public function itens_names()
+    {
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8000/api/itens-names');
+            if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                var_dump(json_decode($response->getBody(), true));
+            } else {
+                echo 'Status: ' . $response->getStatusCode();
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            echo 'Status: ' . $response->getStatusCode();
+        }
+    }
+
 
     //----------------------------------------------------------------------------------------------------------
     public function store_itens($name, $categorie, $place)
-    {
-        $response = $this->client->request('POST', 'http://localhost:8000/api/itens', [
-            'json' => [
-                'name' => $name,
-                'categorie' => $categorie,
-                'place' => $place,
-            ]
-        ]);
-        
-        echo ($response->getBody());
-    }
-
-    //----------------------------------------------------------------------------------------------------------
-    public function lost_itens()
-    {
-        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/lost');
-        
-        echo ($response->getBody());
+    { {
+            try {
+                $response = $this->client->request('POST', 'http://localhost:8000/api/itens', [
+                    'json' => [
+                        'name' => $name,
+                        'place' => $place,
+                        'categorie' => $categorie,
+                    ]
+                ]);
+                if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                    var_dump(json_decode($response->getBody(), true));
+                } else {
+                    echo '' . $response->getStatusCode() . PHP_EOL;
+                }
+            } catch (RequestException $e) {
+                $response = $e->getResponse();
+                echo 'Status: ' . $response->getStatusCode();
+            }
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------
     public function delete_itens($id)
     {
-        $response = $this->client->request('DELETE', 'http://localhost:8000/api/itens', [
-            'json' => [
-                'id' => $id
-            ]
-        ]);
-        
+        try {
+            $response = $this->client->request('DELETE', 'http://localhost:8000/api/itens', [
+                'json' => [
+                    'id' => $id,
+                ]
+            ]);
+            echo 'Status: ' . $response->getStatusCode();
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            echo 'Status: ' . $response->getStatusCode();
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------
     public function view_itens($id)
     {
-        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/view', [
-            'json' => [
-                'id' => $id,
-            ]
-        ]);
-        
-        echo ($response->getBody());
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8000/api/itens/view', [
+                'json' => [
+                    'id' => $id,
+                ]
+            ]);
+            if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                var_dump(json_decode($response->getBody(), true));
+            } else {
+                echo 'Status: ' . $response->getStatusCode();
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            echo 'Status: ' . $response->getStatusCode();
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------
     public function refound_itens($id)
     {
-        $response = $this->client->request('GET', 'http://localhost:8000/api/itens/refound', [
-            'json' => [
-                'id' => $id,
-            ]
-        ]);
-        
-        echo ($response->getBody());
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8000/api/itens/refound', [
+                'json' => [
+                    'id' => $id,
+                ]
+            ]);
+            if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                var_dump(json_decode($response->getBody(), true));
+            } else {
+                echo 'Status: ' . $response->getStatusCode();
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            echo 'Status: ' . $response->getStatusCode();
+        }
     }
 }
 
