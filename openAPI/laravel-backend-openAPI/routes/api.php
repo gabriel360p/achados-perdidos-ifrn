@@ -89,7 +89,7 @@ Route::middleware('api')->get('/user', function (Request $request) {
 
 // PLACES ----------------------------------------------
 
-Route::middleware(['BearearTokenVerify'])->group(function () {
+Route::middleware(['BearearTokenVerify'])->group(function () {//middleware de proteção
 
     Route::get('/places', function () {
         return response(Place::all(), 200);
