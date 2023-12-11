@@ -15,8 +15,13 @@ paths:
 
   /places:
     get:
+      security:
+        - basicAuth: []
+      
       description: Retorna uma lista dos lugares salvos no sistema
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem Feita
         "404":
@@ -24,6 +29,9 @@ paths:
 
   /places/view/{place}:
     get:
+      security:
+      - basicAuth: []
+  
       description: Retorna uma lugar específico
       parameters:
         - in: path
@@ -32,6 +40,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem Feita
         "404":
@@ -39,6 +49,9 @@ paths:
 
   /places/save:
     post:
+      security:
+      - basicAuth: []
+  
       description: Adicionar um novo lugar
       requestBody:
         required: true
@@ -50,6 +63,8 @@ paths:
                 name:
                   type: string
       responses:
+        "401":
+          description: Não Autorizado
         "201":
           description: Salvo com sucesso
         "400":
@@ -57,6 +72,9 @@ paths:
 
   /places/update/{place}:
     put:
+      security:
+      - basicAuth: []
+  
       description: Atualizar os dados de um lugar
       parameters:
         - in: path
@@ -74,6 +92,8 @@ paths:
                 name:
                   type: string
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Atualizado com sucesso
         "404":
@@ -83,6 +103,9 @@ paths:
 
   /places/{place}:
     delete:
+      security:
+      - basicAuth: []
+  
       description: Remover um lugar
       parameters:
         - in: path
@@ -91,6 +114,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Apagado com sucesso
         "404":
@@ -102,8 +127,13 @@ paths:
 
   /categories:
     get:
+      security:
+      - basicAuth: []
+  
       description: Retorna uma lista das categorias salvas no sistema
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem Feita
         "404":
@@ -111,6 +141,9 @@ paths:
 
   /categories/view/{categorie}:
     get:
+      security:
+      - basicAuth: []
+  
       description: Retorna uma categoria específica
       parameters:
         - in: path
@@ -119,6 +152,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem Feita
         "404":
@@ -126,6 +161,9 @@ paths:
 
   /categories/save:
     post:
+      security:
+      - basicAuth: []
+  
       description: Adicionar uma nova categoria
       requestBody:
         required: true
@@ -137,6 +175,8 @@ paths:
                 name:
                   type: string
       responses:
+        "401":
+          description: Não Autorizado
         "201":
           description: Salvo com sucesso
         "400":
@@ -144,6 +184,9 @@ paths:
 
   /categories/update/{categorie}:
     put:
+      security:
+      - basicAuth: []
+  
       description: Atualizar os dados de uma categoria
       parameters:
         - in: path
@@ -161,6 +204,8 @@ paths:
                 name:
                   type: string
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Atualizado com sucesso
         "404":
@@ -170,6 +215,9 @@ paths:
 
   /categories/{categorie}:
     delete:
+      security:
+      - basicAuth: []
+  
       description: Remover uma categoria
       parameters:
         - in: path
@@ -178,6 +226,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Apagado com sucesso
         "404":
@@ -189,15 +239,23 @@ paths:
 
   /itens:
     get:
+      security:
+      - basicAuth: []
+  
       description: Listar todos os itens salvos no sistema
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem feita
         "404":
           description: Recurso não encontrado
 
   /itens/save:
-    post: 
+    post:
+      security:
+      - basicAuth: []
+   
       description: Adicionar um novo item
       requestBody:
         required: true
@@ -215,6 +273,8 @@ paths:
                   description: Descrição extra sobre o item
 
       responses:
+        "401":
+          description: Não Autorizado
         "201":
           description: Salvo com sucesso
         "400":
@@ -222,6 +282,9 @@ paths:
 
   /itens/view/{iten}:
     get:
+      security:
+      - basicAuth: []
+  
       description: Retorna uma categoria específica
       parameters:
         - in: path
@@ -230,6 +293,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Operação bem Feita
         "404":
@@ -237,6 +302,9 @@ paths:
 
   /itens/refound/{iten}:
     put:
+      security:
+      - basicAuth: []
+  
       description: Devolver o item
       parameters:
         - in: path
@@ -245,6 +313,8 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Devolvido com sucesso
         "404":
@@ -252,6 +322,9 @@ paths:
 
   /itens/{iten}:
     delete:
+      security:
+      - basicAuth: []
+  
       description: Remover um item
       parameters:
         - in: path
@@ -260,8 +333,17 @@ paths:
           schema:
             type: integer
       responses:
+        "401":
+          description: Não Autorizado
         "200":
           description: Apagado com sucesso
         "404":
           description: Recurso não encontrado
+
+components:
+  securitySchemes:
+    basicAuth:     
+      type: http
+      scheme: bearer
+
 # --------------------------------------------------------------------
