@@ -13,6 +13,10 @@ class ComposerStaticInitb58d37cf6961593031048083da24def7
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Seld\\CliPrompt\\' => 15,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -24,13 +28,21 @@ class ComposerStaticInitb58d37cf6961593031048083da24def7
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Seld\\CliPrompt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -47,6 +59,10 @@ class ComposerStaticInitb58d37cf6961593031048083da24def7
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
     );
 
